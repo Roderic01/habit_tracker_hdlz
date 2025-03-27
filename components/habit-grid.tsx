@@ -436,7 +436,7 @@ export function HabitGrid({ userId, habits }: HabitGridProps) {
         <table className="w-full border-collapse">
           <thead>
             <tr>
-              <th className="border p-2 sticky-col">{viewType !== 'week' ? 'Hábito' : ''}</th>
+              <th className="border pl-2 pr-3 py-1 sticky-col whitespace-nowrap">{viewType !== 'week' ? 'Hábito' : ''}</th>
               {(viewType === 'year' || viewType === 'semester') && days.length > 100 ? (
                 // Para vistas año/semestre, mostrar encabezados de mes
                 Array.from({ length: viewType === 'year' ? 12 : 6 }, (_, monthIndex) => {
@@ -460,7 +460,7 @@ export function HabitGrid({ userId, habits }: HabitGridProps) {
                 days.map((day, index) => (
                   <th 
                     key={index} 
-                    className={`border p-1 text-center text-xs ${isToday(day) ? 'bg-primary/10' : ''}`}
+                    className={`border p-0 text-center text-xs ${isToday(day) ? 'bg-primary/10' : ''}`}
                   >
                     {formatDayHeader(day, viewType)}
                   </th>
@@ -471,7 +471,7 @@ export function HabitGrid({ userId, habits }: HabitGridProps) {
           <tbody>
             {habits.map(habit => (
               <tr key={habit.id}>
-                <td className="border p-2 font-medium sticky-col">
+                <td className="border pl-2 pr-3 py-1 font-medium sticky-col whitespace-nowrap w-auto">
                   <div className="flex items-center gap-1">
                     <span>{habit.name}</span>
                     <div className="relative group">
@@ -562,7 +562,7 @@ export function HabitGrid({ userId, habits }: HabitGridProps) {
                   // Vistas con menos días: mostrar cada día individualmente
                   days.map((day, dayIndex) => {
                     const status = getCompletionStatus(habit, day);
-                    const cellSize = viewType === 'week' ? 'w-6 h-6' : 
+                    const cellSize = viewType === 'week' ? 'w-8 h-8' : 
                                     viewType === 'month' ? 'w-5 h-5' :
                                     viewType === 'quarter' ? 'w-4 h-4' : 'w-3 h-3';
                                     
@@ -581,6 +581,13 @@ export function HabitGrid({ userId, habits }: HabitGridProps) {
             ))}
           </tbody>
         </table>
+        <style jsx>{`
+          .sticky-col {
+            width: 1%;
+            white-space: nowrap;
+            padding-right: 12px; /* Espacio estético */
+          }
+        `}</style>
       </div>
     </div>
   );
